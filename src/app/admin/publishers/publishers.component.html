@@ -1,0 +1,32 @@
+<div class="ui container">
+    <h2 class="ui header">Publishers</h2>
+    <form class="ui form" [formGroup]="publisherForm" (ngSubmit)="submitForm()">
+        <div class="field" [ngClass]="{'error': publisherForm.get('publisherName')?.invalid && publisherForm.get('publisherName')?.touched}">
+            <label>Publisher Name</label>
+            <input type="text" formControlName="publisherName" placeholder="Publisher Name">
+            <div *ngIf="publisherForm.get('publisherName')?.invalid && publisherForm.get('publisherName')?.touched" class="ui pointing red basic label">
+                Publisher name is required and cannot be empty.
+            </div>
+        </div>
+        <button type="submit" class="ui button" [disabled]="publisherForm.invalid">Submit</button>
+    </form>
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Publisher Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let publisher of publishers$ | async">
+                <td>{{ publisher.id }}</td>
+                <td>{{ publisher.publisherName }}</td>
+                <td>
+                    <button class="ui primary button" (click)="editPublisher(publisher)">Edit</button>
+                    <button class="ui red button" (click)="deletePublisher(publisher.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

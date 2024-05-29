@@ -1,0 +1,20 @@
+<div class="ui container">
+    <div class="ui segment">
+      <h2 class="ui header">Login</h2>
+      <form class="ui form" (ngSubmit)="onSubmit()">
+        <div class="field">
+          <label for="username">Username</label>
+          <input type="text" id="username" [(ngModel)]="username" name="username" required />
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" [(ngModel)]="password" name="password" required />
+        </div>
+        <button class="ui primary button" type="submit">Login</button>
+      </form>
+      <div *ngIf="loginFailed" class="ui negative message">
+        Invalid username or password.
+      </div>
+    </div>
+  </div>
+  

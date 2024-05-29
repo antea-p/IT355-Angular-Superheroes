@@ -1,0 +1,68 @@
+<div class="ui container">
+    <h2 class="ui header">Superheroes</h2>
+    <form class="ui form" [formGroup]="superheroForm" (ngSubmit)="submitForm()">
+        <div class="field"
+            [ngClass]="{'error': superheroForm.get('superheroName')?.invalid && superheroForm.get('superheroName')?.touched}">
+            <label>Superhero Name</label>
+            <input type="text" formControlName="superheroName" placeholder="Superhero Name">
+            <div *ngIf="superheroForm.get('superheroName')?.invalid && superheroForm.get('superheroName')?.touched"
+                class="ui pointing red basic label">
+                Superhero name is required and cannot be empty.
+            </div>
+        </div>
+        <div class="field"
+            [ngClass]="{'error': superheroForm.get('fullName')?.invalid && superheroForm.get('fullName')?.touched}">
+            <label>Full Name</label>
+            <input type="text" formControlName="fullName" placeholder="Full Name">
+            <div *ngIf="superheroForm.get('fullName')?.invalid && superheroForm.get('fullName')?.touched"
+                class="ui pointing red basic label">
+                Full name is required and cannot be empty.
+            </div>
+        </div>
+        <div class="field"
+            [ngClass]="{'error': superheroForm.get('heightCm')?.invalid && superheroForm.get('heightCm')?.touched}">
+            <label>Height (cm)</label>
+            <input type="number" formControlName="heightCm" placeholder="Height in cm">
+            <div *ngIf="superheroForm.get('heightCm')?.invalid && superheroForm.get('heightCm')?.touched"
+                class="ui pointing red basic label">
+                Height is required and must be >= 0.
+            </div>
+        </div>
+        <div class="field"
+            [ngClass]="{'error': superheroForm.get('weightKG')?.invalid && superheroForm.get('weightKG')?.touched}">
+            <label>Weight (kg)</label>
+            <input type="number" formControlName="weightKG" placeholder="Weight in kg">
+            <div *ngIf="superheroForm.get('weightKG')?.invalid && superheroForm.get('weightKG')?.touched"
+                class="ui pointing red basic label">
+                Weight is required and must be >= 0.
+            </div>
+        </div>
+        <button type="submit" class="ui button" [disabled]="superheroForm.invalid">{{ editMode ? 'Update' : 'Create'
+            }}</button>
+    </form>
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Superhero Name</th>
+                <th>Full Name</th>
+                <th>Height (cm)</th>
+                <th>Weight (kg)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let superhero of superheroes$ | async">
+                <td>{{ superhero.id }}</td>
+                <td>{{ superhero.superheroName }}</td>
+                <td>{{ superhero.fullName }}</td>
+                <td>{{ superhero.heightCm }}</td>
+                <td>{{ superhero.weightKG }}</td>
+                <td>
+                    <button class="ui green button" (click)="editSuperhero(superhero)">Edit</button>
+                    <button class="ui red button" (click)="deleteSuperhero(superhero.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

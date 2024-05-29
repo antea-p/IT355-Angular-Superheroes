@@ -1,0 +1,35 @@
+<div class="ui container">
+    <h2 class="ui header">Superpowers</h2>
+    <form class="ui form" [formGroup]="superpowerForm" (ngSubmit)="submitForm()">
+        <div class="field"
+            [ngClass]="{'error': superpowerForm.get('powerName')?.invalid && superpowerForm.get('powerName')?.touched}">
+            <label>Superpower Name</label>
+            <input type="text" formControlName="powerName" placeholder="Superpower Name">
+            <div *ngIf="superpowerForm.get('powerName')?.invalid && superpowerForm.get('powerName')?.touched"
+                class="ui pointing red basic label">
+                Superpower name is required and cannot be empty.
+            </div>
+        </div>
+        <button type="submit" class="ui button" [disabled]="superpowerForm.invalid">{{ editMode ? 'Update' : 'Create'
+            }}</button>
+    </form>
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Superpower Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let superpower of superpowers$ | async">
+                <td>{{ superpower.id }}</td>
+                <td>{{ superpower.powerName }}</td>
+                <td>
+                    <button class="ui green button" (click)="editSuperpower(superpower)">Edit</button>
+                    <button class="ui red button" (click)="deleteSuperpower(superpower.id)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

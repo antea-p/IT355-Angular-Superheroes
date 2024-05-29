@@ -1,0 +1,19 @@
+
+<div class="ui container">
+    <h2 class="ui header">Superpowers</h2>
+    <table class="ui celled table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Superpower Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let superpower of superpowers$ | async">
+          <td>{{ superpower.id }}</td>
+          <td>{{ superpower.powerName }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

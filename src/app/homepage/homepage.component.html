@@ -1,0 +1,13 @@
+<div class="ui container">
+  <div class="ui segment">
+    <h2 class="ui header">Welcome to the Homepage</h2>
+    <div *ngIf="(isLoggedIn | async) === true; else loggedOut">
+      <a (click)="logout()" class="ui button">Logout</a>
+      <a routerLink="/admin" class="ui button">Admin</a>
+      <a routerLink="/user" class="ui button">User</a>
+    </div>
+    <ng-template #loggedOut>
+      <a routerLink="/login" class="ui button">Login</a>
+    </ng-template>
+  </div>
+</div>

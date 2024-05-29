@@ -1,0 +1,18 @@
+<div class="ui container">
+    <h2 class="ui header">Publishers</h2>
+    <table class="ui celled table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Publisher Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let publisher of publishers$ | async">
+          <td>{{ publisher.id }}</td>
+          <td>{{ publisher.publisherName }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
